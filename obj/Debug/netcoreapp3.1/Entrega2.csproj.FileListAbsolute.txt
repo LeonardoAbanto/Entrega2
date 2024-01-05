@@ -84,3 +84,4 @@ E:\Documentos\Postulaciones\EY\entregable2\Entrega2\bin\Debug\netcoreapp3.1\runt
 E:\Documentos\Postulaciones\EY\entregable2\Entrega2\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 E:\Documentos\Postulaciones\EY\entregable2\Entrega2\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 E:\Documentos\Postulaciones\EY\entregable2\Entrega2\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+E:\Documentos\Postulaciones\EY\entregable2\Entrega2\obj\Debug\netcoreapp3.1\Entrega2.sourcelink.json

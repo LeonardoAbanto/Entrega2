@@ -17,11 +17,11 @@ Implementaciones realizadas:
 - Listado de proveedores actuales en tabla
 - Botón Ver proveedor con detalles
 - Botón Eliminar proveedor
+- Botón Agregar Proveedor
+- Validaciones
 
 Implementaciones en proceso:
-- Botón Agregar proveedor (error 400)
+- Botón Editar Proveedor 
 
 Implementaciones pendientes:
-- Botón Editar proveedor
 - Cruce con REST API listas de alto riesgo
-- Validaciones puntuales para cada atributo de proveedores

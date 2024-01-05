@@ -9,6 +9,7 @@ export class Home extends Component {
     loading: true,
     mostrarFormulario: false,
     proveedorSeleccionado: null,
+    editarSeleccionado: null,
   };
 
   async componentDidMount() {
@@ -32,6 +33,7 @@ export class Home extends Component {
   // Función para abrir el formulario
   abrirFormulario = () => {
     this.setState({ mostrarFormulario: true });
+    this.dejarEditarProveedor();
   };
 
   // Función para cerrar el formulario
@@ -49,30 +51,23 @@ export class Home extends Component {
   };
 
   handleAgregarProveedor = async (nuevoProveedor) => {
-    try {
-      // Hacer la solicitud para agregar el nuevo proveedor a la base de datos
-      const response = await fetch('https://localhost:5001/api/proveedores', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(nuevoProveedor),
-      });
+    await this.obtenerProveedoresDesdeAPI();
+    this.cerrarFormulario();
+  }
 
-      if (response.ok) {
-        // Actualizar la lista de proveedores después de agregar uno nuevo
-        await this.obtenerProveedoresDesdeAPI();
-      } else {
-        console.error('Error al insertar proveedor:', response.status);
-        // Manejo de errores
-      }
-    } catch (error) {
-      console.error('Error al insertar proveedor:', error);
-      // Manejo de errores
-    } finally {
-      this.cerrarFormulario(); // Cerrar el formulario independientemente del resultado de la inserción
-    }
+  handleEditarProveedor = async (Proveedor) => {
+    await this.obtenerProveedoresDesdeAPI();
+    this.cerrarFormulario();
   };
+  
+  dejarEditarProveedor = () =>{
+    this.setState({ editarSeleccionado: null });
+  }
+
+  editarProveedor = (proveedor) => {
+    this.setState({ editarSeleccionado: proveedor, mostrarFormulario: true });
+  };
+  
 
   handleEliminarProveedor = async (proveedorId) => {
     try {
@@ -150,7 +145,7 @@ export class Home extends Component {
                         Ver
                       </button>
                       <span> </span>
-                      <button className="btn btn-primary btn-accion"  onClick={() => this.verDetallesProveedor(proveedor)}>
+                      <button className="btn btn-primary btn-accion"  onClick={() => this.editarProveedor(proveedor)}>
                         Editar
                       </button>
                       <span> </span>
@@ -171,6 +166,7 @@ export class Home extends Component {
               <ProveedorForm
                 onSubmit={this.handleAgregarProveedor}
                 cerrarFormulario={this.cerrarFormulario}
+                proveedorEdit = {this.state.editarSeleccionado}
               />
             )}
           </div>

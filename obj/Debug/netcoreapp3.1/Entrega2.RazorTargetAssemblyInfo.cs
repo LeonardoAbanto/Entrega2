@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyProductAttribute("Entrega2")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+98bdaf4feba6de5ce741a6d43dc761cd42d487e8")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Entrega2.Views")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 

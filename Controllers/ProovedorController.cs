@@ -79,5 +79,35 @@ namespace Entrega2.Controllers
         }
     }
 
-  }
+    [HttpPut("{id}")]
+        public IActionResult ActualizarProveedor(int id, [FromBody] Proveedor proveedorActualizado)
+        {
+            try
+            {
+                var proveedorExistente = _context.Proveedores.Find(id);
+
+                if (proveedorExistente == null)
+                {
+                    return NotFound(new { mensaje = $"Proveedor con Id {id} no encontrado" });
+                }
+
+                // Actualiza las propiedades del proveedorExistente con los valores de proveedorActualizado
+                _context.Entry(proveedorExistente).CurrentValues.SetValues(proveedorActualizado);
+
+                // Guarda los cambios en la base de datos
+                _context.SaveChanges();
+
+                return Ok(new { mensaje = "Proveedor actualizado exitosamente" });
+            }
+            catch (Exception ex)
+            {
+                // Loguear el error para obtener más detalles
+                Console.Error.WriteLine($"Error al actualizar proveedor (Exception): {ex.Message}");
+
+                // Devolver un código de estado 500 junto con un mensaje de error
+                return StatusCode(500, new { mensaje = "Error interno del servidor al actualizar proveedor", detalle = ex.Message });
+            }
+        }
+
+    }
 }
