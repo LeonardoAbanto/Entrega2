@@ -2,11 +2,9 @@ Aplicación web SPA para la administración de proveedores.
 
 Tecnologías utilizadas:
 
-Backend: .NET Core 3.1
-
-Frontend: React
-
-Base de datos: SQL Server 2022 Express
+- Backend: .NET Core 3.1
+- Frontend: React
+- Base de datos: SQL Server 2022 Express
 
 
 Implementaciones realizadas:
@@ -18,10 +16,8 @@ Implementaciones realizadas:
 - Botón Ver proveedor con detalles
 - Botón Eliminar proveedor
 - Botón Agregar Proveedor
-- Validaciones
-
-Implementaciones en proceso:
 - Botón Editar Proveedor 
+- Validaciones
 
 Implementaciones pendientes:
 - Cruce con REST API listas de alto riesgo

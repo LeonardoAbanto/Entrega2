@@ -3,23 +3,24 @@ import React, { useState, useEffect } from 'react';
 const ProveedorForm = ({ onSubmit, cerrarFormulario, proveedorEdit }) => {
 
   const initialState = {
-  RazonSocial: '',
-  NombreComercial: '',
-  IdentificacionTributaria: '',
-  NumeroTelefonico: '',
-  CorreoElectronico: '',
-  SitioWeb: 'https://',
-  DireccionFisica: '',
-  Pais: '',
-  FacturacionAnual: 0,
-  FechaUltimaEdicion: '2024-01-03T10:34:53.44',}
+  razonSocial: '',
+  nombreComercial: '',
+  identificacionTributaria: '',
+  numeroTelefonico: '',
+  correoElectronico: '',
+  sitioWeb: 'https://',
+  direccionFisica: '',
+  pais: '',
+  facturacionAnual: 0,
+  }
 
   const [proveedor, setProveedor] = useState(initialState);
 
   useEffect(() => {
     // Cuando el componente se monta o cambia proveedorEdit, actualiza el estado del formulario
-    setProveedor(proveedorEdit || initialState);
+    setProveedor(proveedorEdit ? { ...initialState, ...proveedorEdit } : initialState);
   }, [proveedorEdit]);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,10 +36,8 @@ const ProveedorForm = ({ onSubmit, cerrarFormulario, proveedorEdit }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...proveedor, FacturacionAnual: Number(proveedor.FacturacionAnual), fechaUltimaEdicion: new Date().toISOString(), }),
+        body: JSON.stringify({ ...proveedor, facturacionAnual: Number(proveedor.facturacionAnual), fechaUltimaEdicion: new Date().toISOString().slice(0, -1), }),
       });
-        console.log(JSON.stringify({ ...proveedor, FacturacionAnual: Number(proveedor.FacturacionAnual), fechaUltimaEdicion: new Date().toISOString().slice(0, -1), }),
-        )
       if (response.ok) {
         console.log('Proveedor insertado exitosamente');
         onSubmit(); // Llamada a la función del padre para recargar la lista de proveedores
@@ -64,13 +63,15 @@ const ProveedorForm = ({ onSubmit, cerrarFormulario, proveedorEdit }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://localhost:5001/api/proveedores/${proveedor.id}', {
+      const response = await fetch(`https://localhost:5001/api/proveedores/${proveedor.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...proveedor, FacturacionAnual: Number(proveedor.FacturacionAnual), fechaUltimaEdicion: new Date().toISOString(), }),
+        body: JSON.stringify({ ...proveedor, facturacionAnual: Number(proveedor.facturacionAnual), fechaUltimaEdicion: new Date().toISOString(), }),
       });
+      console.log(JSON.stringify({ ...proveedor, facturacionAnual: Number(proveedor.facturacionAnual), fechaUltimaEdicion: new Date().toISOString(), }),
+      )
       if (response.ok) {
         console.log('Proveedor insertado exitosamente');
         onSubmit(); // Llamada a la función del padre para recargar la lista de proveedores
@@ -95,38 +96,38 @@ const ProveedorForm = ({ onSubmit, cerrarFormulario, proveedorEdit }) => {
   return (
     <form onSubmit={ proveedorEdit ? (handleEdit) : (handleSubmit)}>
       <fieldset>
-        {proveedorEdit ? (<legend>Editar Proveedor {proveedor.id} - {proveedor.NombreComercial}</legend>) : (<legend>Información del Proveedor</legend>)}
+        {proveedorEdit ? (<legend>Editar Proveedor {proveedor.id} - {proveedor.nombreComercial}</legend>) : (<legend>Información del Proveedor</legend>)}
 
         <label>Razón Social: </label>
-        <input type="text" name="RazonSocial" value={proveedor.RazonSocial} onChange={handleChange} required />
+        <input type="text" name="razonSocial" value={proveedor.razonSocial} onChange={handleChange} required />
         <p></p>
 
         <label>Nombre Comercial: </label>
-        <input type="text" name="NombreComercial" value={proveedor.NombreComercial} onChange={handleChange} required />
+        <input type="text" name="nombreComercial" value={proveedor.nombreComercial} onChange={handleChange} required />
         <p></p>
 
         <label>Identificación Tributaria: </label>
-        <input type="text" name="IdentificacionTributaria" value={proveedor.IdentificacionTributaria} onChange={handleChange} minLength={11} maxLength={11} required/>
+        <input type="text" name="identificacionTributaria" value={proveedor.identificacionTributaria} onChange={handleChange} minLength={11} maxLength={11} required/>
         <p></p>
 
         <label>Número Telefónico: </label>
-        <input type="number" name="NumeroTelefonico" value={proveedor.NumeroTelefonico} onChange={handleChange} required />
+        <input type="number" name="numeroTelefonico" value={proveedor.numeroTelefonico} onChange={handleChange} required />
         <p></p>
 
         <label>Correo Electrónico: </label>
-        <input type="text" name="CorreoElectronico" value={proveedor.CorreoElectronico} onChange={handleChange} required/>
+        <input type="text" name="correoElectronico" value={proveedor.correoElectronico} onChange={handleChange} required/>
         <p></p>
 
         <label>Sitio Web: </label>
-        <input type="url" name="SitioWeb" value={proveedor.SitioWeb} onChange={handleChange} required/>
+        <input type="url" name="sitioWeb" value={proveedor.sitioWeb} onChange={handleChange} required/>
         <p></p>
 
         <label>Dirección Física: </label>
-        <input type="text" name="DireccionFisica" value={proveedor.DireccionFisica} onChange={handleChange} required/>
+        <input type="text" name="direccionFisica" value={proveedor.direccionFisica} onChange={handleChange} required/>
         <p></p>
 
         <label>País: </label>
-        <select name="Pais" value={proveedor.Pais} onChange={handleChange} required>
+        <select name="pais" value={proveedor.pais} onChange={handleChange} required>
           <option value="">Selecciona un país</option>
           <option value="Peru">Perú</option>
           <option value="Mexico">México</option>
@@ -135,7 +136,7 @@ const ProveedorForm = ({ onSubmit, cerrarFormulario, proveedorEdit }) => {
         <p></p>
 
         <label>Facturación Anual: </label>
-        <input type="number" name="FacturacionAnual" value={parseFloat(proveedor.FacturacionAnual)} onChange={handleChange} required/>
+        <input type="number" name="facturacionAnual" value={parseFloat(proveedor.facturacionAnual)} onChange={handleChange} required/>
       </fieldset>
       <p></p>
 
